@@ -1,9 +1,12 @@
 // src/components/Home.js
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ContactSection from './ContactSection';
 import ProjectCard from './ProjectCard';
+import TypingEffect from './TypingEffect';
+import CodeRainBackground from './CodeRainBackground';
+import GlitchText from './GlitchText';
 
 const Home = () => {
   const targetRef = useRef(null);
@@ -11,12 +14,15 @@ const Home = () => {
     target: targetRef,
     offset: ["start start", "end start"]
   });
+  
+  const [isTerminalVisible, setIsTerminalVisible] = useState(false);
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
   
   const videoRef1 = useRef(null);
   const videoRef2 = useRef(null);
+  const terminalRef = useRef(null);
   
   useEffect(() => {
     // Lazy load videos when they come into view
@@ -46,6 +52,23 @@ const Home = () => {
       if (video2Element) observer.unobserve(video2Element);
     };
   }, []);
+  
+  // Terminal effect
+  useEffect(() => {
+    const showTerminal = setTimeout(() => {
+      setIsTerminalVisible(true);
+    }, 1000);
+    
+    return () => clearTimeout(showTerminal);
+  }, []);
+  
+  const terminalLines = [
+    { text: "> Initializing AI research interface...", delay: 500 },
+    { text: "> Loading neural network modules...", delay: 1200 },
+    { text: "> Connecting to sports analytics database...", delay: 2000 },
+    { text: "> Processing visual recognition algorithms...", delay: 2800 },
+    { text: "> System ready.", delay: 3600 }
+  ];
 
   return (
     <>
@@ -54,20 +77,48 @@ const Home = () => {
           style={{ opacity, scale }}
           className="hero-content"
         >
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Future of AI in <GradientText>Lip Reading</GradientText> & <GradientText>Sports Analytics</GradientText>
-          </motion.h1>
-          <motion.p
+            <Terminal visible={isTerminalVisible} ref={terminalRef}>
+              {terminalLines.map((line, index) => (
+                <TerminalLine 
+                  key={index}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: line.delay / 1000, duration: 0.3 }}
+                >
+                  {line.text}
+                </TerminalLine>
+              ))}
+            </Terminal>
+            
+            <GlitchHeading>
+              Future of AI in <GradientText>Lip Reading</GradientText> & <GradientText>Sports Analytics</GradientText>
+            </GlitchHeading>
+          </motion.div>
+          
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
+            className="typing-container"
           >
-            Pioneering AI solutions to enhance communication and redefine sports performance
-          </motion.p>
+            <TypingText>
+              <TypingEffect 
+                texts={[
+                  "Pioneering AI solutions to enhance communication.",
+                  "Decoding speech through visual lip patterns.",
+                  "Redefining sports performance analytics.",
+                  "Building the future of computer vision."
+                ]} 
+                speed={50}
+              />
+            </TypingText>
+          </motion.div>
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -84,13 +135,13 @@ const Home = () => {
             </ScrollButton>
           </motion.div>
         </motion.div>
-        <BackgroundAnimation />
+        <CodeRainBackground />
       </HeroSection>
 
       <ProjectsSection id="research">
-        <SectionTitle>
-          <span>Research</span> Projects
-        </SectionTitle>
+        <SectionTitleWithGlitch>
+          <GlitchText text="Research Projects" />
+        </SectionTitleWithGlitch>
         
         <ProjectsGrid>
           <ProjectCard 
@@ -115,7 +166,7 @@ const Home = () => {
       </ProjectsSection>
 
       <ResearchSection>
-        <SectionTitle>Research <span>Methodology</span></SectionTitle>
+        <SectionTitle>Research <GradientSpan>Methodology</GradientSpan></SectionTitle>
         <ResearchContent>
           <ResearchText>
             <h3>Data Collection & Preparation</h3>
@@ -165,7 +216,7 @@ const Home = () => {
       </ResearchSection>
 
       <VideoSection id="videos">
-        <SectionTitle>AI in <span>Action</span></SectionTitle>
+        <SectionTitle>AI in <GradientSpan>Action</GradientSpan></SectionTitle>
         <p className="section-description">
           See how our AI models detect and track objects in real-time across different sports scenarios
         </p>
@@ -200,7 +251,7 @@ const Home = () => {
       </VideoSection>
 
       <TechnicalSection>
-        <SectionTitle>Technical <span>Breakdown</span></SectionTitle>
+        <SectionTitle>Technical <GradientSpan>Breakdown</GradientSpan></SectionTitle>
         
         <TechBlocks>
           <TechBlock>
@@ -266,24 +317,6 @@ const Home = () => {
   );
 };
 
-// Background Animation Component
-const BackgroundAnimation = () => (
-  <AnimationContainer>
-    {Array(20).fill().map((_, i) => (
-      <AnimationCircle 
-        key={i}
-        style={{
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-          animationDelay: `${Math.random() * 5}s`,
-          width: `${Math.random() * 100 + 50}px`,
-          height: `${Math.random() * 100 + 50}px`,
-        }}
-      />
-    ))}
-  </AnimationContainer>
-);
-
 // Styled Components
 const HeroSection = styled.section`
   position: relative;
@@ -303,18 +336,11 @@ const HeroSection = styled.section`
     color: white;
   }
   
-  h1 {
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-  
-  p {
-    font-size: clamp(1.1rem, 3vw, 1.5rem);
-    max-width: 700px;
-    margin: 0 auto 2.5rem;
-    opacity: 0.9;
+  .typing-container {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
@@ -326,36 +352,42 @@ const GradientText = styled.span`
   display: inline;
 `;
 
-const AnimationContainer = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  z-index: 1;
+const GradientSpan = styled.span`
+  color: #3b82f6;
 `;
 
-const AnimationCircle = styled.div`
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0) 70%);
-  animation: float 15s infinite ease-in-out;
-  
-  @keyframes float {
-    0% {
-      transform: translate(0, 0) scale(1);
-      opacity: 0.1;
-    }
-    50% {
-      transform: translate(30px, -30px) scale(1.5);
-      opacity: 0.2;
-    }
-    100% {
-      transform: translate(0, 0) scale(1);
-      opacity: 0.1;
-    }
-  }
+const Terminal = styled.div`
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9rem;
+  text-align: left;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  opacity: ${props => props.visible ? 1 : 0};
+  transition: opacity 0.5s ease;
+`;
+
+const TerminalLine = styled(motion.div)`
+  color: #9fef00;
+  margin-bottom: 0.5rem;
+`;
+
+const GlitchHeading = styled.h1`
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+`;
+
+const TypingText = styled.p`
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  opacity: 0.9;
 `;
 
 const ScrollButton = styled.a`
@@ -399,15 +431,19 @@ const SectionTitle = styled.h2`
   font-weight: 800;
   margin-bottom: 2.5rem;
   text-align: center;
-  
-  span {
-    color: #3b82f6;
-  }
+`;
+
+const SectionTitleWithGlitch = styled.div`
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+  text-align: center;
 `;
 
 const ProjectsSection = styled.section`
   padding: 5rem 2rem;
   background: #f8fafc;
+  position: relative;
 `;
 
 const ProjectsGrid = styled.div`
