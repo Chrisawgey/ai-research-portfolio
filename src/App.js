@@ -1,4 +1,5 @@
 // src/App.js
+<<<<<<< HEAD
 import React, { useEffect } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
@@ -172,6 +173,14 @@ const MobileMenuButton = styled.button`
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
   
+=======
+import React from 'react';
+import { createGlobalStyle } from 'styled-components';
+import Home from './components/Home';
+import Footer from './components/Footer';
+
+const GlobalStyle = createGlobalStyle`
+>>>>>>> 847c63fb9e632f98a00248e8d13d071cb4e26bde
   * {
     box-sizing: border-box;
     margin: 0;
@@ -179,6 +188,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
+<<<<<<< HEAD
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: #333;
     -webkit-font-smoothing: antialiased;
@@ -188,6 +198,42 @@ const GlobalStyle = createGlobalStyle`
   
   html {
     scroll-behavior: smooth;
+=======
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #334155;
+    background-color: #ffffff;
+    line-height: 1.5;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  
+  /* Add custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+>>>>>>> 847c63fb9e632f98a00248e8d13d071cb4e26bde
   }
 `;
 
@@ -195,7 +241,10 @@ function App() {
   return (
     <>
       <GlobalStyle />
+<<<<<<< HEAD
       <Navbar />
+=======
+>>>>>>> 847c63fb9e632f98a00248e8d13d071cb4e26bde
       <Home />
       <Footer />
     </>

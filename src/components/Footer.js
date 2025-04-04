@@ -4,9 +4,12 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+  
   return (
     <FooterContainer>
       <FooterContent>
+<<<<<<< HEAD
         <FooterTop>
           <FooterLogo>
             <LogoText>RESEARCH 24'</LogoText>
@@ -68,18 +71,60 @@ const Footer = () => {
           </SocialLinks>
         </FooterBottom>
       </FooterContent>
+=======
+        <FooterLogo>
+          <LogoText>CV<span>.</span></LogoText>
+          <LogoSubtext>AI Research</LogoSubtext>
+        </FooterLogo>
+        
+        <FooterLinks>
+          <LinkGroup>
+            <LinkGroupTitle>Navigation</LinkGroupTitle>
+            <FooterLink href="#research">Research</FooterLink>
+            <FooterLink href="#videos">Videos</FooterLink>
+            <FooterLink href="#contact">Contact</FooterLink>
+          </LinkGroup>
+          
+          <LinkGroup>
+            <LinkGroupTitle>Connect</LinkGroupTitle>
+            <FooterLink href="https://github.com/Chrisawgey" target="_blank" rel="noopener noreferrer">GitHub</FooterLink>
+            <FooterLink href="https://www.linkedin.com/in/chrisvpopoca/" target="_blank" rel="noopener noreferrer">LinkedIn</FooterLink>
+          </LinkGroup>
+          
+          <LinkGroup>
+            <LinkGroupTitle>Resources</LinkGroupTitle>
+            <FooterLink href="#">Publications</FooterLink>
+            <FooterLink href="#">Documentation</FooterLink>
+          </LinkGroup>
+        </FooterLinks>
+      </FooterContent>
+      
+      <FooterBottom>
+        <Copyright>&copy; {currentYear} AI Research Portfolio - Christopher Vargas</Copyright>
+        <BottomLinks>
+          <BottomLink href="#">Privacy</BottomLink>
+          <BottomLink href="#">Terms</BottomLink>
+        </BottomLinks>
+      </FooterBottom>
+>>>>>>> 847c63fb9e632f98a00248e8d13d071cb4e26bde
     </FooterContainer>
   );
 };
 
-// Styled Components for Footer
+// Styled Components
 const FooterContainer = styled.footer`
+<<<<<<< HEAD
   background-color: #1a1a1a;
   color: white;
+=======
+  background: #0f172a;
+  color: #cbd5e1;
+>>>>>>> 847c63fb9e632f98a00248e8d13d071cb4e26bde
   padding: 4rem 2rem 2rem;
 `;
 
 const FooterContent = styled.div`
+<<<<<<< HEAD
   max-width: 1200px;
   margin: 0 auto;
 `;
@@ -93,10 +138,24 @@ const FooterTop = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 2rem;
+=======
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+>>>>>>> 847c63fb9e632f98a00248e8d13d071cb4e26bde
   }
 `;
 
 const FooterLogo = styled.div`
+<<<<<<< HEAD
   margin-right: 2rem;
 `;
 
@@ -114,6 +173,26 @@ const LogoTagline = styled.p`
   margin-top: 0.5rem;
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.7);
+=======
+  flex: 1;
+  min-width: 200px;
+`;
+
+const LogoText = styled.h2`
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  
+  span {
+    color: #3b82f6;
+  }
+`;
+
+const LogoSubtext = styled.p`
+  margin-top: 0.5rem;
+  opacity: 0.7;
+>>>>>>> 847c63fb9e632f98a00248e8d13d071cb4e26bde
 `;
 
 const FooterLinks = styled.div`
@@ -121,12 +200,22 @@ const FooterLinks = styled.div`
   flex-wrap: wrap;
   gap: 3rem;
   
+<<<<<<< HEAD
   @media (max-width: 600px) {
+=======
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  @media (max-width: 500px) {
+>>>>>>> 847c63fb9e632f98a00248e8d13d071cb4e26bde
     flex-direction: column;
     gap: 2rem;
   }
 `;
 
+<<<<<<< HEAD
 const FooterColumn = styled.div`
   min-width: 120px;
   
@@ -164,6 +253,29 @@ const FooterDivider = styled.hr`
   height: 1px;
   background-color: rgba(255, 255, 255, 0.1);
   margin: 0 0 2rem;
+=======
+const LinkGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const LinkGroupTitle = styled.h3`
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 0.5rem;
+`;
+
+const FooterLink = styled.a`
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: #3b82f6;
+  }
+>>>>>>> 847c63fb9e632f98a00248e8d13d071cb4e26bde
 `;
 
 const FooterBottom = styled.div`
@@ -172,6 +284,7 @@ const FooterBottom = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+<<<<<<< HEAD
 `;
 
 const Copyright = styled.p`
@@ -200,6 +313,36 @@ const SocialIcon = styled.a`
     background-color: #4A90E2;
     color: white;
     transform: translateY(-3px);
+=======
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
+const Copyright = styled.p`
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+`;
+
+const BottomLinks = styled.div`
+  display: flex;
+  gap: 1.5rem;
+`;
+
+const BottomLink = styled.a`
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: #3b82f6;
+>>>>>>> 847c63fb9e632f98a00248e8d13d071cb4e26bde
   }
 `;
 
