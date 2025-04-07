@@ -114,7 +114,7 @@ const Home = () => {
                   "Redefining sports performance analytics.",
                   "Building the future of computer vision."
                 ]} 
-                speed={50}
+                speed={20}
               />
             </TypingText>
           </motion.div>
@@ -139,9 +139,7 @@ const Home = () => {
       </HeroSection>
 
       <ProjectsSection id="research">
-        <SectionTitleWithGlitch>
-          <GlitchText text="Research Projects" />
-        </SectionTitleWithGlitch>
+        <SectionTitle>Research Projects</SectionTitle>
         
         <ProjectsGrid>
           <ProjectCard 
@@ -154,13 +152,13 @@ const Home = () => {
             title="Soccer Analytics"
             description="Real-time tracking system for soccer that identifies players, ball movement, and strategic patterns."
             tech={["YOLOv8", "Object Detection", "Python"]}
-            image="/soccer-placeholder.jpg"
+            image="/futbolgif.gif"
           />
           <ProjectCard 
             title="Tennis Analysis"
             description="Automated tennis analytics platform that tracks player movements, ball trajectory, and shot analysis."
             tech={["Computer Vision", "Object Tracking", "React"]}
-            image="/tennis-placeholder.jpg"
+            image="/tennisgif.gif"
           />
         </ProjectsGrid>
       </ProjectsSection>

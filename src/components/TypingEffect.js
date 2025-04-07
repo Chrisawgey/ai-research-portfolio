@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const TypingEffect = ({ texts, speed = 100, delay = 1500 }) => {
+const TypingEffect = ({ texts, speed = 20, delay = 1000 }) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -18,7 +18,7 @@ const TypingEffect = ({ texts, speed = 100, delay = 1500 }) => {
         // Typing mode
         if (currentText.length < fullText.length) {
           setCurrentText(fullText.substring(0, currentText.length + 1));
-          const randomSpeed = speed - Math.random() * 40;
+          const randomSpeed = speed - Math.random() * 10;
           timeout = setTimeout(handleTyping, randomSpeed);
         } else {
           // Wait before starting to delete
@@ -31,19 +31,19 @@ const TypingEffect = ({ texts, speed = 100, delay = 1500 }) => {
         // Deleting mode
         if (currentText.length > 0) {
           setCurrentText(fullText.substring(0, currentText.length - 1));
-          const randomSpeed = speed / 2 - Math.random() * 20;
+          const randomSpeed = speed / 2 - Math.random() * 5;
           timeout = setTimeout(handleTyping, randomSpeed);
         } else {
           setIsDeleting(false);
           // Move to next text
           setCurrentTextIndex((currentTextIndex + 1) % texts.length);
-          timeout = setTimeout(handleTyping, 500);
+          timeout = setTimeout(handleTyping, 300);
         }
       }
     };
     
     // Start the typing effect
-    timeout = setTimeout(handleTyping, 500);
+    timeout = setTimeout(handleTyping, 300);
     
     return () => clearTimeout(timeout);
   }, [currentText, currentTextIndex, isDeleting, texts, speed, delay]);
